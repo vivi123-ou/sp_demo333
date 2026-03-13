@@ -1,9 +1,9 @@
 package vn.edu.sp_demo333.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import vn.edu.sp_demo333.entity.Students;
 import vn.edu.sp_demo333.repository.StudentRepository;
-
 import java.util.List;
 
 @RestController
@@ -17,17 +17,17 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Students> getAllStudent(){
+    public List<Students> getAllStudent() {
         return repository.findAll();
     }
 
     @PostMapping
-    public Students addStudent(@RequestBody Students student){
-        return this.repository.save(student);
+    public Students addStudent(@Valid @RequestBody Students student) {
+        return repository.save(student);
     }
 
     @GetMapping("/{id}")
-    public Students getStudentById(@PathVariable Long id){
-        return this.repository.findById(id).orElse(null);
+    public Students getStudentById(@PathVariable Long id) {
+        return repository.findById(id).orElse(null);
     }
 }
